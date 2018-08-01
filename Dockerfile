@@ -1,12 +1,11 @@
 FROM ubuntu:14.04
 MAINTAINER qwh005007@gmail.com
 
-RUN echo "deb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse \n deb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse \n deb http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse \n deb http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse \n deb http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse \n  deb-src http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse \n deb-src http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse \n deb-src http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse \n deb-src http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse \n deb-src http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse \n" > /etc/apt/sources.list && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get install -y build-essential autoconf autopoint automake git pkg-config libtool wget upx-ucl
 COPY mtmips-sdk.tar.bz2 /mnt/mtmips-sdk.tar.bz2
 WORKDIR /mnt
-RUN tar jxvf mtmips-sdk.tar.bz2 && \
+RUN tar jxf mtmips-sdk.tar.bz2 && \
     mv OpenWrt-SDK-mtmips-for-redhat-x86_64-gcc-4.8-linaro_uClibc-0.9.33.2 hc5962 && \
     rm /mnt/mtmips-sdk.tar.bz2
 
