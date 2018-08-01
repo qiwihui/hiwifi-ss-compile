@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 # -----------创建编译目录
-# rm -rf /mnt/build/shadowsocks-$MLIB
+echo $PATH
+rm -rf /mnt/build/shadowsocks-$MLIB
 mkdir -p /mnt/build/shadowsocks-$MLIB && cd /mnt/build/shadowsocks-$MLIB
 BASE=$(pwd)
 SRC=$BASE/src
