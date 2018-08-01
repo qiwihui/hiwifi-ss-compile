@@ -3,7 +3,6 @@ language: generic
 services:
 - docker
 before_install:
-- wget http://sdk.ikcd.net/mtmips-sdk.tar.bz2
 - docker build -t qiwihui/hiwifi .
 - docker run -d --name hiwifi -v `pwd`:/mnt qiwihui/hiwifi
 - docker ps -a
