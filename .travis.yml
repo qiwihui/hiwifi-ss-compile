@@ -14,8 +14,8 @@ addons:
             - wget
             - upx-ucl
 before_install:
-  - sudo mkdir -p /mnt && cd /mnt && \
-    sudo wget -q http://sdk.ikcd.net/mtmips-sdk.tar.bz2 && \
+  - mkdir -p /mnt && cd /mnt && \
+    wget -q http://sdk.ikcd.net/mtmips-sdk.tar.bz2 && \
     tar jxf mtmips-sdk.tar.bz2 && \
     mv OpenWrt-SDK-mtmips-for-redhat-x86_64-gcc-4.8-linaro_uClibc-0.9.33.2 hc5962 && \
     rm mtmips-sdk.tar.bz2
