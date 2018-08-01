@@ -77,6 +77,7 @@ git checkout v$ver -b v$ver
 git submodule init && git submodule update
 
 # TODO: modify to disable pthread check
+sed -i '105,108d' configure.ac 
 ./autogen.sh
 LIBS="-lpthread -lm" LDFLAGS="-Wl,-static -static -static-libgcc -L$PREFIX/lib" CFLAGS="-I$PREFIX/include"  ./configure --host=$HOST --prefix=$PREFIX --disable-ssp --disable-documentation --with-mbedtls=$PREFIX --with-pcre=$PREFIX --with-sodium=$PREFIX
 make -j`nproc` && make install
