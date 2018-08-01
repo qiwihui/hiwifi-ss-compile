@@ -1,22 +1,30 @@
-sudo: required
+dist: trusty
+sudo: false
 language: generic
 services:
 - docker
 before_install:
-- docker pull qiwihui/hiwifi-ss-compile
-- mkdir -p build
-- docker run -d --name hiwifi -v `pwd`/compile.sh:/mnt/compile.sh qiwihui/hiwifi-ss-compile
+  - apt-get update && apt-get install -y build-essential autoconf autopoint automake git pkg-config libtool wget upx-ucl
+  - mkdir -p /mnt && cd /mnt && \
+    wget -q http://sdk.ikcd.net/mtmips-sdk.tar.bz2 && \
+    tar jxf mtmips-sdk.tar.bz2 && \
+    mv OpenWrt-SDK-mtmips-for-redhat-x86_64-gcc-4.8-linaro_uClibc-0.9.33.2 hc5962 && \
+    rm mtmips-sdk.tar.bz2
+  - export MLIB=mipsel
+  - export TOOLCHAINDIR=/mnt/hc5962/staging_dir
+  - export TOOLCHAIN=/mnt/hc5962/staging_dir/toolchain-mipsel_1004kc_gcc-4.8-linaro_uClibc-0.9.33.2
+  - export HOST=mipsel-openwrt-linux
+  - export PATH="/mnt/hc5962/staging_dir/toolchain-mipsel_1004kc_gcc-4.8-linaro_uClibc-0.9.33.2/bin:$PATH"
 script:
-- docker exec -i hiwifi sh /mnt/compile.sh
-- for f in $(docker exec -it hiwifi bash -c "ls /mnt/build/shadowsocks-mipsel/ss-*"); do docker cp hiwifi:`echo $f | sed 's/\\r//g'` ./build/; done
-- for f in $(docker exec -it hiwifi bash -c "ls /mnt/build/shadowsocks-mipsel/obfs-*"); do docker cp hiwifi:`echo $f | sed 's/\\r//g'` ./build/; done
+  - pwd
+  - sh /mnt/compile.sh
 deploy:
   provider: releases
   api_key:
     secure: S+o1ak3dPE/zmaBye8xIyGMXfE/AvEG+I1bEwJD1tFIr3l1Ectrw8J5oeumqOm6igIT6ajciO8flDzNVXFwYjyfzZyHptFD2GVLt6RoU/CFqMR+1wbp2twQrKo7a61WvNdG3YbZJ/QNb3iQLs8/e79V0hc4cuosxJMGjm0DBKTJk21uQqAa9ti29tL5vBH2bhAIRuVlaBekkcM3crN+U1Z8I5byqSCUhncsH/i0a2lwW1IWONb/lkmAxNKLKgRRUz14dDramkHk7qgQwmk0RFvnzUufGcFpQpgTzw9RIHgUuVbubFwJbyKPuH8elK5W2031EhPU7JaCaZ7D3+ceJGr0vmi3Gb/8qLxzOlDgFwH7Q4tWQzTkQg+8gLFI9aqvsr7rmFoMEjy4uTL5atUh773bOmca9EsNb5oo/4sphccPEKXxiyddR+IzvLjb6Xz3IMIEsuUaYupPpCG7DOp10EYuP9CgQi1m/e+EbBEVHGNjXkuIyh4dnJ5KjvqFvFQ2Rg40/nr4GpuF6RbT0zF8zTMgHKoQmDGk6ALCg9rBF+e6Os/h3m3FpmW6+C3bxKiQQiXZPRv+6UBCbCBLz+gJhlG/JPUiI4iR/Qfmj5u6JcDtFM0xdlN8j32Gk1xjJ7j0I6FXP7pNvJSiymPKhJlVL8kgo/ocjV+lBay/PiQIom54=
   file: 
-    - build/ss-*
-    - build/obfs-*
+    - /mnt/build/shadowsocks-mipsel/ss-*
+    - /mnt/build/shadowsocks-mipsel/obfs-*
   skip_cleanup: true
   on:
     tags: true
