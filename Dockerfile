@@ -16,4 +16,4 @@ ENV MLIB=mipsel \
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games \
     PATH=/mnt/hc5962/staging_dir/toolchain-mipsel_1004kc_gcc-4.8-linaro_uClibc-0.9.33.2/bin:$PATH
 
-CMD ["ping 127.0.0.1"]
+CMD ["/bin/ping 127.0.0.1"]
