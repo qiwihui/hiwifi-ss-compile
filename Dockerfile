@@ -3,7 +3,6 @@ MAINTAINER qwh005007@gmail.com
 
 RUN apt-get update && \
     apt-get install -y build-essential autoconf autopoint automake git pkg-config libtool wget upx-ucl
-COPY mtmips-sdk.tar.bz2 /mnt/mtmips-sdk.tar.bz2
 WORKDIR /mnt
 RUN wget http://sdk.ikcd.net/mtmips-sdk.tar.bz2 && \
     tar jxf mtmips-sdk.tar.bz2 && \
