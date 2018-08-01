@@ -8,8 +8,8 @@ before_install:
 - docker run -d --name hiwifi -v `pwd`/compile.sh:/mnt/compile.sh qiwihui/hiwifi-ss-compile
 script:
 - docker exec -i hiwifi sh /mnt/compile.sh
-- for f in $(docker exec -it hiwifi bash -c "ls /mnt/build/shadowsocks-mipsel/ss-*"); do docker cp hiwifi:`echo $f | sed 's/\r//g'` ./build/; done
-- for f in $(docker exec -it hiwifi bash -c "ls /mnt/build/shadowsocks-mipsel/obfs-*"); do docker cp hiwifi:`echo $f | sed 's/\r//g'` ./build/; done
+- for f in $(docker exec -it hiwifi bash -c "ls /mnt/build/shadowsocks-mipsel/ss-*"); do docker cp hiwifi:`echo $f | sed 's/\\r//g'` ./build/; done
+- for f in $(docker exec -it hiwifi bash -c "ls /mnt/build/shadowsocks-mipsel/obfs-*"); do docker cp hiwifi:`echo $f | sed 's/\\r//g'` ./build/; done
 deploy:
   provider: releases
   api_key:
