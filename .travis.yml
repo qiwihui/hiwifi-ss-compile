@@ -4,7 +4,8 @@ services:
 - docker
 before_install:
 - docker pull qiwihui/hiwifi-ss-compile
-- docker run -d --name hiwifi -v `pwd`/compile.sh:/mnt/compile.sh qiwihui/hiwifi-ss-compile
+- mkdir -p /mnt/build
+- docker run -d --name hiwifi -v `pwd`/compile.sh:/mnt/compile.sh -v /mnt/build:/mnt/build qiwihui/hiwifi-ss-compile
 - docker ps -a
 script:
 - docker exec -i hiwifi sh /mnt/compile.sh
