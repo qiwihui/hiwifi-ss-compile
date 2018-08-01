@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 # -----------创建编译目录
-echo $PATH
 ls -al /mnt/hc5962/staging_dir/toolchain-mipsel_1004kc_gcc-4.8-linaro_uClibc-0.9.33.2/bin
 rm -rf /mnt/build/shadowsocks-$MLIB
 mkdir -p /mnt/build/shadowsocks-$MLIB && cd /mnt/build/shadowsocks-$MLIB
