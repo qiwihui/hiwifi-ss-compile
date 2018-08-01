@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 # -----------创建编译目录
-ls -al /mnt/hc5962/staging_dir/toolchain-mipsel_1004kc_gcc-4.8-linaro_uClibc-0.9.33.2/bin
 rm -rf /mnt/build/shadowsocks-$MLIB
 mkdir -p /mnt/build/shadowsocks-$MLIB && cd /mnt/build/shadowsocks-$MLIB
 BASE=$(pwd)
@@ -78,6 +77,7 @@ git checkout v$ver -b v$ver
 git submodule init && git submodule update
 
 # TODO: modify to disable pthread check
+sed -i '105,108d' configure.ac 
 ./autogen.sh
 LIBS="-lpthread -lm" LDFLAGS="-Wl,-static -static -static-libgcc -L$PREFIX/lib" CFLAGS="-I$PREFIX/include"  ./configure --host=$HOST --prefix=$PREFIX --disable-ssp --disable-documentation --with-mbedtls=$PREFIX --with-pcre=$PREFIX --with-sodium=$PREFIX
 make -j`nproc` && make install
