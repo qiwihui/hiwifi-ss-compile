@@ -14,67 +14,67 @@ LD_LIBRARY_PATH=$PRE/lib/
 export STAGING_DIR=/mnt/hc5962/staging_dir
 
 # ------------编译mbedTLS
-# mkdir -p $SRC/mbedTLS && cd $SRC/mbedTLS
-# ver=2.6.0
-# wget --no-check-certificate https://tls.mbed.org/download/mbedtls-$ver-gpl.tgz
-# tar zxf mbedtls-$ver-gpl.tgz
-# cd mbedtls-$ver
-# CC=$HOST-gcc AR=$HOST-ar LD=$HOST-ld LDFLAGS=-static make DESTDIR=$PREFIX install
+mkdir -p $SRC/mbedTLS && cd $SRC/mbedTLS
+ver=2.6.0
+wget --no-check-certificate https://tls.mbed.org/download/mbedtls-$ver-gpl.tgz
+tar zxf mbedtls-$ver-gpl.tgz
+cd mbedtls-$ver
+CC=$HOST-gcc AR=$HOST-ar LD=$HOST-ld LDFLAGS=-static make DESTDIR=$PREFIX install
 
-# # ------------编译pcre
-# mkdir -p $SRC/pcre && cd $SRC/pcre
-# ver=8.41
-# wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$ver.tar.gz
-# tar zxf pcre-$ver.tar.gz
-# cd pcre-$ver
-# ./configure --host=$HOST --prefix=$PREFIX --disable-shared --enable-utf8 --enable-unicode-properties
-# make -j`nproc` && make install
+# ------------编译pcre
+mkdir -p $SRC/pcre && cd $SRC/pcre
+ver=8.41
+wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$ver.tar.gz
+tar zxf pcre-$ver.tar.gz
+cd pcre-$ver
+./configure --host=$HOST --prefix=$PREFIX --disable-shared --enable-utf8 --enable-unicode-properties
+make -j`nproc` && make install
 
-# # ------------编译libsodium
-# mkdir -p $SRC/libsodium && cd $SRC/libsodium
-# ver=1.0.16
-# wget --no-check-certificate https://download.libsodium.org/libsodium/releases/libsodium-$ver.tar.gz
-# tar zxf libsodium-$ver.tar.gz
-# cd libsodium-$ver
-# ./configure --host=$HOST --prefix=$PREFIX --disable-ssp --disable-shared
-# make -j`nproc` && make install
+# ------------编译libsodium
+mkdir -p $SRC/libsodium && cd $SRC/libsodium
+ver=1.0.16
+wget --no-check-certificate https://download.libsodium.org/libsodium/releases/libsodium-$ver.tar.gz
+tar zxf libsodium-$ver.tar.gz
+cd libsodium-$ver
+./configure --host=$HOST --prefix=$PREFIX --disable-ssp --disable-shared
+make -j`nproc` && make install
 
-# # ------------编译libev
-# mkdir -p $SRC/libev && cd $SRC/libev
-# ver=4.24
-# # wget http://dist.schmorp.de/libev/libev-$ver.tar.gz
-# wget https://sources.voidlinux.eu/libev-$ver/libev-$ver.tar.gz
-# tar zxf libev-$ver.tar.gz
-# cd libev-$ver
-# ./configure --host=$HOST --prefix=$PREFIX --disable-shared
-# make -j`nproc` && make install
+# ------------编译libev
+mkdir -p $SRC/libev && cd $SRC/libev
+ver=4.24
+# wget http://dist.schmorp.de/libev/libev-$ver.tar.gz
+wget https://sources.voidlinux.eu/libev-$ver/libev-$ver.tar.gz
+tar zxf libev-$ver.tar.gz
+cd libev-$ver
+./configure --host=$HOST --prefix=$PREFIX --disable-shared
+make -j`nproc` && make install
 
-# # ------------编译libudns
-# mkdir -p $SRC/libudns && cd $SRC/libudns
-# git clone git://github.com/shadowsocks/libudns
-# cd libudns
-# ./autogen.sh
-# ./configure --host=$HOST --prefix=$PREFIX
-# make -j`nproc` && make install
+# ------------编译libudns
+mkdir -p $SRC/libudns && cd $SRC/libudns
+git clone git://github.com/shadowsocks/libudns
+cd libudns
+./autogen.sh
+./configure --host=$HOST --prefix=$PREFIX
+make -j`nproc` && make install
 
-# # ------------编译c-ares
-# mkdir -p $SRC/c-ares && cd $SRC/c-ares
-# ver=1.13.0
-# wget https://c-ares.haxx.se/download/c-ares-$ver.tar.gz
-# tar zxvf c-ares-$ver.tar.gz
-# cd c-ares-$ver
-# sed -i 's#\[-\]#[1.13.0]#' configure.ac
-# ./buildconf
-# ./configure --prefix=$PREFIX --host=$HOST CC=$HOST-gcc --enable-shared=no --enable-static=yes
-# make -j`nproc` && make install
+# ------------编译c-ares
+mkdir -p $SRC/c-ares && cd $SRC/c-ares
+ver=1.13.0
+wget https://c-ares.haxx.se/download/c-ares-$ver.tar.gz
+tar zxvf c-ares-$ver.tar.gz
+cd c-ares-$ver
+sed -i 's#\[-\]#[1.13.0]#' configure.ac
+./buildconf
+./configure --prefix=$PREFIX --host=$HOST CC=$HOST-gcc --enable-shared=no --enable-static=yes
+make -j`nproc` && make install
 
-# # ------------编译shadowsocks-libev
-# mkdir -p $SRC/shadowsocks-libev && cd $SRC/shadowsocks-libev
-# ver=3.2.0
-# git clone git://github.com/shadowsocks/shadowsocks-libev
-# cd shadowsocks-libev
-# git checkout v$ver -b v$ver
-# git submodule init && git submodule update
+# ------------编译shadowsocks-libev
+mkdir -p $SRC/shadowsocks-libev && cd $SRC/shadowsocks-libev
+ver=3.2.0
+git clone git://github.com/shadowsocks/shadowsocks-libev
+cd shadowsocks-libev
+git checkout v$ver -b v$ver
+git submodule init && git submodule update
 
 # TODO: modify to disable pthread check
 ./autogen.sh

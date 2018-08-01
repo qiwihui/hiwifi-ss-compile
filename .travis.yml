@@ -5,10 +5,10 @@ services:
 before_install:
 - wget http://sdk.ikcd.net/mtmips-sdk.tar.bz2
 - docker build -t qiwihui/hiwifi .
-- docker run -d --name hiwifi -v ${pwd}:/mnt qiwihui/hiwifi
+- docker run -d --name hiwifi -v `pwd`:/mnt qiwihui/hiwifi
 - docker ps -a
 script:
-- docker exec -it qiwihui/hiwifi "cd /mnt && sh /mnt/compile.sh"
+- docker exec -it hiwifi "cd /mnt && sh /mnt/compile.sh"
 deploy:
   provider: releases
   api_key:
