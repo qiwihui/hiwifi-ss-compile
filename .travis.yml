@@ -15,5 +15,6 @@ deploy:
   file: 
     - build/shadowsocks-mipsel/ss-*
     - build/shadowsocks-mipsel/obfs-*
+  skip_cleanup: true
   on:
-    repo: qiwihui/hiwifi-ss-compile
+    tags: true
