@@ -15,6 +15,4 @@ ENV TOOLCHAIN=/mnt/hc5962/staging_dir/toolchain-mipsel_1004kc_gcc-4.8-linaro_uCl
 ENV HOST=mipsel-openwrt-linux
 ENV PATH="/mnt/hc5962/staging_dir/toolchain-mipsel_1004kc_gcc-4.8-linaro_uClibc-0.9.33.2/bin:$PATH"
 
-RUN echo $PATH
-
 CMD ["/bin/ping", "127.0.0.1"]

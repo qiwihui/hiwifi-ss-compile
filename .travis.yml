@@ -3,8 +3,8 @@ language: generic
 services:
 - docker
 before_install:
-- docker build -t qiwihui/hiwifi .
-- docker run -d --name hiwifi -v `pwd`:/mnt qiwihui/hiwifi
+- docker pull qiwihui/hiwifi-ss-compile
+- docker run -d --name hiwifi -v `pwd`:/mnt qiwihui/hiwifi-ss-compile
 - docker ps -a
 script:
 - docker exec -i hiwifi sh /mnt/compile.sh
