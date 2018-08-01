@@ -1,12 +1,10 @@
 dist: trusty
 sudo: required
 language: generic
-services:
-- docker
 before_install:
   - sudo apt-get update && sudo apt-get install -y build-essential autoconf autopoint automake git pkg-config libtool wget upx-ucl
   - sudo mkdir -p /mnt && cd /mnt && \
-    wget -q http://sdk.ikcd.net/mtmips-sdk.tar.bz2 && \
+    sudo wget -q http://sdk.ikcd.net/mtmips-sdk.tar.bz2 && \
     tar jxf mtmips-sdk.tar.bz2 && \
     mv OpenWrt-SDK-mtmips-for-redhat-x86_64-gcc-4.8-linaro_uClibc-0.9.33.2 hc5962 && \
     rm mtmips-sdk.tar.bz2
